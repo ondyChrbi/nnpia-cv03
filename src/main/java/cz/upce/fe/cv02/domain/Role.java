@@ -1,5 +1,6 @@
 package cz.upce.fe.cv02.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -25,5 +26,6 @@ public class Role {
             inverseJoinColumns = @JoinColumn(name = "app_user_id")
     )
     @ToString.Exclude // It will prevent to infinity loop in Lombok ToString generation because field from each class points to themselves
+    @JsonIgnore
     private List<AppUser> users = Collections.emptyList();
 }

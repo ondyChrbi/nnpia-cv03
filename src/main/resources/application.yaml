@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/nnpia
+    url: jdbc:postgresql://localhost:5433/nnpia
     username: nnpia
     password: nnpia
   jpa:

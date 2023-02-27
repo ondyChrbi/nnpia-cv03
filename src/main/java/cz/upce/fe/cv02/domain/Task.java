@@ -1,5 +1,6 @@
 package cz.upce.fe.cv02.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -29,5 +30,6 @@ public class Task {
     @ManyToOne
     @JoinColumn(name="author_id", nullable=false)
     @ToString.Exclude
+    @JsonIgnore
     private AppUser author;
 }

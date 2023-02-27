@@ -2,14 +2,12 @@ package cz.upce.fe.cv02.controller;
 
 import cz.upce.fe.cv02.domain.AppUser;
 import cz.upce.fe.cv02.dto.AppUserResponseDtoV1;
+import cz.upce.fe.cv02.dto.AppUserResponseInputDtoV1;
 import cz.upce.fe.cv02.service.AppUserService;
 import cz.upce.fe.cv02.service.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +36,13 @@ public class AppUserController {
         return ResponseEntity.ok(toDto(result));
     }
 
+    @PostMapping("")
+    public ResponseEntity<AppUserResponseDtoV1> create(@RequestBody final AppUserResponseInputDtoV1 input) {
+        var result = appUserService.create(toEntity(input));
+
+        return ResponseEntity.ok(toDto(result));
+    }
+
     private static AppUserResponseDtoV1 toDto(final AppUser appUser) {
         return new AppUserResponseDtoV1(
                 appUser.getId(),
@@ -47,6 +52,16 @@ public class AppUserController {
                 appUser.getCreationDate(),
                 appUser.getUpdateDate(),
                 appUser.getRoles()
+        );
+    }
+
+    private static AppUser toEntity(final AppUserResponseInputDtoV1 input) {
+        return new AppUser(
+                input.getUsername(),
+                input.getPassword(),
+                input.getActive(),
+                input.getCreationDate(),
+                input.getUpdateDate()
         );
     }
 }

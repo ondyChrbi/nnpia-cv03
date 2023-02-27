@@ -50,6 +50,13 @@ public class AppUserController {
         return ResponseEntity.ok(toDto(result));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable final Long id) {
+        appUserService.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
     private static AppUserResponseDtoV1 toDto(final AppUser appUser) {
         return new AppUserResponseDtoV1(
                 appUser.getId(),

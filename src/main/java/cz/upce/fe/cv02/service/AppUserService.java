@@ -31,11 +31,16 @@ public class AppUserService {
 
     @Transactional
     public AppUser create(final AppUser appUser) {
-       return  appUserRepository.save(appUser);
+       return appUserRepository.save(appUser);
     }
 
     @Transactional
     public AppUser update(final AppUser toEntity) {
         return appUserRepository.save(toEntity);
+    }
+
+    @Transactional
+    public void delete(final Long id) {
+        appUserRepository.deleteById(id);
     }
 }

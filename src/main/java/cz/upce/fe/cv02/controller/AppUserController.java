@@ -43,6 +43,13 @@ public class AppUserController {
         return ResponseEntity.ok(toDto(result));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<AppUserResponseDtoV1> update(@PathVariable final Long id, @RequestBody final AppUserResponseInputDtoV1 input) {
+        var result = appUserService.update(toEntity(id, input));
+
+        return ResponseEntity.ok(toDto(result));
+    }
+
     private static AppUserResponseDtoV1 toDto(final AppUser appUser) {
         return new AppUserResponseDtoV1(
                 appUser.getId(),
@@ -57,6 +64,17 @@ public class AppUserController {
 
     private static AppUser toEntity(final AppUserResponseInputDtoV1 input) {
         return new AppUser(
+                input.getUsername(),
+                input.getPassword(),
+                input.getActive(),
+                input.getCreationDate(),
+                input.getUpdateDate()
+        );
+    }
+
+    private static AppUser toEntity(final Long id, final AppUserResponseInputDtoV1 input) {
+        return new AppUser(
+                id,
                 input.getUsername(),
                 input.getPassword(),
                 input.getActive(),

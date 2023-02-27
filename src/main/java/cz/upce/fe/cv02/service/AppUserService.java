@@ -33,4 +33,9 @@ public class AppUserService {
     public AppUser create(final AppUser appUser) {
        return  appUserRepository.save(appUser);
     }
+
+    @Transactional
+    public AppUser update(final AppUser toEntity) {
+        return appUserRepository.save(toEntity);
+    }
 }

@@ -7,6 +7,7 @@ import cz.upce.fe.cv02.service.AppUserService;
 import cz.upce.fe.cv02.service.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class AppUserController {
     }
 
     @PostMapping("")
-    public ResponseEntity<AppUserResponseDtoV1> create(@RequestBody final AppUserResponseInputDtoV1 input) {
+    public ResponseEntity<AppUserResponseDtoV1> create(@RequestBody @Validated final AppUserResponseInputDtoV1 input) {
         var result = appUserService.create(toEntity(input));
 
         return ResponseEntity.ok(toDto(result));
